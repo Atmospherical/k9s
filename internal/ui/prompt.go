@@ -144,8 +144,13 @@ func (p *Prompt) keyboard(evt *tcell.EventKey) *tcell.EventKey {
 		p.model.ClearText(true)
 	case tcell.KeyUp:
 		if s, ok := m.NextSuggestion(); ok {
+			p.model.ClearText(true)
 			p.suggest(p.model.GetText(), s)
+			p.model.SetText(p.model.GetText() + s)
 		}
+
+
+
 	case tcell.KeyDown:
 		if s, ok := m.PrevSuggestion(); ok {
 			p.suggest(p.model.GetText(), s)
